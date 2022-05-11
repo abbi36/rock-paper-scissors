@@ -53,3 +53,4 @@ function generateComputerChoice() {
     }
         scoreDisplay.innerHTML = result
 }
+
