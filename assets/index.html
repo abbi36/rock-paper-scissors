@@ -1,26 +1,38 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Rock, Paper, Scissors.</title>
-    <link rel="stylesheet" href="style.css"/>
+	<meta charset="UTF-8">
+	<meta name="viewport"
+		content="width=device-width,
+				initial-scale=1.0">
+	<link rel="stylesheet" href="style.css">
+	<title>Rock Paper Scissor</title>
 </head>
 <body>
-    <div class="container">
-    <div class="cc">
-    <h2>Computer: <span id="computer"></span></h2> </div>
-    <div class="us"> 
-    <h2>You: <span id="user"></span></h2> </div>
-    <div class="res"> 
-    <h2>Score: <span id="score"></span></h2> </div>
-    
-    <button  id="rock" class="rock">rock 🤘</button>
-    <button id="paper" class="paper">paper 🧻</button>
-    <button id="scissors" class="scissors">scissors ✂</button>
-    </div>
-</div>
-<script src="index.js"></script>
+	<section class="game">
+		<div class="title">Rock Paper Scissor</div>
+		<div class="score">
+			<div class="playerScore">
+				<h2>Player</h2>
+				<p class="p-count count">0</p>
+
+			</div>	
+			<div class="computerScore">
+				<h2>Computer</h2>
+				<p class="c-count count">0</p>
+
+			</div>
+		</div>
+		<div class="move">Choose your move</div>
+		<div class="movesleft">Moves Left: 10 </div>
+		<div class="options">
+			<button class="rock">Rock</button>
+			<button class="paper">Paper</button>
+			<button class="scissor">Scissors</button>
+		</div>
+		<div class="result"></div>
+		<button class="reload"></button>
+	</section>
+	<script src="index.js"></script>
 </body>
 </html>

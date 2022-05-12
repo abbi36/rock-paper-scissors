@@ -1,56 +1,112 @@
-const selectionDisplay = document.getElementById('computer')
-const userSelection = document.getElementById('user')
-const scoreDisplay = document.getElementById('score')
-const possibleChoices = document.querySelectorAll('button')
-let userChoice
-let computerChoice
+const game = () => {
+	let playerScore = 0;
+	let computerScore = 0;
+	let moves = 0;
 
-possibleChoices.forEach(possibleChoice => possibleChoice.addEventListener('click', (e) => {
-    userChoice = e.target.id
-    userSelection.innerHTML = userChoice
-    generateComputerChoice()
-    getResult()
-}))
+	const playGame = () => {
+		const rockBtn = document.querySelector('.rock');
+		const paperBtn = document.querySelector('.paper');
+		const scissorBtn = document.querySelector('.scissor');
+		const playerOptions = [rockBtn,paperBtn,scissorBtn];
+		const computerOptions = ['rock','paper','scissors']
+	
+		playerOptions.forEach(option => {
+			option.addEventListener('click',function(){
 
-function generateComputerChoice() {
-    const randomNumber = Math.floor(Math.random() * 3) + 1
+				const movesLeft = document.querySelector('.movesleft');
+				moves++;
+				movesLeft.innerText = `Moves Left: ${10-moves}`;
+				
 
-    if (randomNumber === 1) {
-        computerChoice = 'rock'
-    }
+				const choiceNumber = Math.floor(Math.random()*3);
+				const computerChoice = computerOptions[choiceNumber];
 
-    if (randomNumber === 2) {
-        computerChoice = 'paper'
-    }
+				winner(this.innerText,computerChoice)
+				if(moves == 10){
+					gameOver(playerOptions,movesLeft);
+				}
+			})
+		})
+		
+	}
+	const winner = (player,computer) => {
+		const result = document.querySelector('.result');
+		const playerScoreBoard = document.querySelector('.p-count');
+		const computerScoreBoard = document.querySelector('.c-count');
+		player = player.toLowerCase();
+		computer = computer.toLowerCase();
+		if(player === computer){
+			result.textContent = 'Tie'
+		}
+		else if(player == 'rock'){
+			if(computer == 'paper'){
+				result.textContent = 'You lose!';
+				computerScore++;
+				computerScoreBoard.textContent = computerScore;
 
-    if (randomNumber === 3) {
-        computerChoice = 'scissors'
-    }
-    selectionDisplay.innerHTML = computerChoice
+			}else{
+				result.textContent = 'You Won!'
+				playerScore++;
+				playerScoreBoard.textContent = playerScore;
+			}
+		}
+		else if(player == 'scissors'){
+			if(computer == 'rock'){
+				result.textContent = 'Loser';
+				computerScore++;
+				computerScoreBoard.textContent = computerScore;
+			}else{
+				result.textContent = 'Winner!';
+				playerScore++;
+				playerScoreBoard.textContent = playerScore;
+			}
+		}
+		else if(player == 'paper'){
+			if(computer == 'scissors'){
+				result.textContent = 'You lost!';
+				computerScore++;
+				computerScoreBoard.textContent = computerScore;
+			}else{
+				result.textContent = 'You win!';
+				playerScore++;
+				playerScoreBoard.textContent = playerScore;
+			}
+		}
+	}
+	const gameOver = (playerOptions,movesLeft) => {
+
+		const chooseMove = document.querySelector('.move');
+		const result = document.querySelector('.result');
+		const reloadBtn = document.querySelector('.reload');
+
+		playerOptions.forEach(option => {
+			option.style.display = 'none';
+		})
+
+		chooseMove.innerText = 'Game Over!!'
+		movesLeft.style.display = 'none';
+
+		if(playerScore > computerScore){
+			result.style.fontSize = '2rem';
+			result.innerText = 'You Won The Game'
+			result.style.color = '#308D46';
+		}
+		else if(playerScore < computerScore){
+			result.style.fontSize = '2rem';
+			result.innerText = 'You Lost The Game';
+			result.style.color = 'red';
+		}
+		else{
+			result.style.fontSize = '2rem';
+			result.innerText = 'Tie';
+			result.style.color = 'grey'
+		}
+		reloadBtn.innerText = 'Restart';
+		reloadBtn.style.display = 'flex'
+		reloadBtn.addEventListener('click',() => {
+			window.location.reload();
+		})
+	}
+	playGame();
 }
-
-    function getResult() {
-        if (computerChoice === userChoice) {
-            result = 'Tie!'
-        }
-        if (computerChoice === 'rock' && userChoice === "paper") {
-            result = 'Loser!'
-        }
-        if (computerChoice === 'rock' && userChoice === "scissors") {
-            result = 'You lost!'
-        }
-        if (computerChoice === 'paper' && userChoice === "scissors") {
-        result = 'Winner!'
-        }   
-        if (computerChoice === 'paper' && userChoice === "rock") {
-        result = 'Try again!'
-        }   
-        if (computerChoice === 'scissors' && userChoice === "rock") {
-        result = 'Winner Winner!'
-        }   
-        if (computerChoice === 'scissors' && userChoice === "paper") {
-        result = 'You LOST!'
-    }
-        scoreDisplay.innerHTML = result
-}
-
+game();
