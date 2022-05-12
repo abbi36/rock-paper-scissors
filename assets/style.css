@@ -2,7 +2,7 @@
 	padding: 0;
 	margin: 0;
 	box-sizing: border-box;
-	background: #103783;
+	background: #f8f544;
 	color: black;
 
 }
@@ -47,9 +47,9 @@
 
 .rock, .paper, .scissor{
 	padding: 0.8rem;
-	width: 100px;
+	width: 115px;
 	border-radius: 10px;
-	background: #87a9b6;
+	background: #0ace24;
 	outline: none;
 	border-color: black;
 	border: none;
